@@ -1,6 +1,9 @@
 import { Cloud, Server, Database } from "lucide-react";
 import { observer } from "mobx-react-lite";
 import { GrWindows } from "react-icons/gr";
+import { RiImageCircleAiFill } from "react-icons/ri";
+import { BsSoundwave } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 import {
   Sidebar,
@@ -44,10 +47,42 @@ const ModelsSidebar = observer(() => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <button>
+                  <Link to="/" className="flex items-center">
                     <GrWindows className="mr-2 size-4" />
-                    microsoft/Florence-2-large
-                  </button>
+                    <span>microsoft/Florence-2-large</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Text-to-Speech</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/kokoro" className="flex items-center">
+                    <BsSoundwave className="mr-2 size-4" />
+                    <span>hexgrad/Kokoro-82M</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Text-to-Image</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/stable-diffusion" className="flex items-center">
+                    <RiImageCircleAiFill className="mr-2 size-4" />
+                    <span>stable-diffusion-v1-5/stable-diffusion-v1-5</span>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
