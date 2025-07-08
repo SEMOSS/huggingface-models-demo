@@ -15,6 +15,9 @@ const KokoroContainer: React.FC<KokoroContainerProps> = ({ children }) => {
         Kokoro is an open-weight TTS model with 82 million parameters. Despite
         its lightweight architecture, it delivers comparable quality to larger
         models while being significantly faster and more cost-efficient.
+        <span className="ml-2 text-slate-600 font-medium">
+          ⏱️ Generation time is tracked and displayed for each request.
+        </span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <KokoroInput />

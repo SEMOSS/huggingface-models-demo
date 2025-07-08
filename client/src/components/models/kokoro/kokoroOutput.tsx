@@ -12,13 +12,39 @@ import {
 } from "../../../@providers/components/ui/card";
 import { Badge } from "../../../@providers/components/ui/badge";
 import { Separator } from "../../../@providers/components/ui/separator";
-import { Play, Pause, Download, Volume2, Clock, Zap } from "lucide-react";
+import {
+  Play,
+  Pause,
+  Download,
+  Volume2,
+  Clock,
+  Zap,
+  Timer,
+} from "lucide-react";
 
 const KokoroOutput: React.FC = observer(() => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentTime, setCurrentTime] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
+  const [liveGenerationTime, setLiveGenerationTime] = React.useState(0);
+
+  // Live timer effect for generation
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (kokoroStore.isProcessing && kokoroStore.generationStartTime) {
+      interval = setInterval(() => {
+        setLiveGenerationTime(Date.now() - kokoroStore.generationStartTime!);
+      }, 100); // Update every 100ms for smooth timer
+    } else {
+      setLiveGenerationTime(0);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [kokoroStore.isProcessing, kokoroStore.generationStartTime]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -105,7 +131,11 @@ const KokoroOutput: React.FC = observer(() => {
           <div className="flex flex-col items-center justify-center py-12">
             <div className="animate-pulse flex flex-col items-center">
               <Volume2 className="h-12 w-12 text-muted-foreground mb-4" />
-              <p className="text-muted-foreground">Generating speech...</p>
+              <p className="text-muted-foreground mb-2">Generating speech...</p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Timer className="h-4 w-4" />
+                <span>{(liveGenerationTime / 1000).toFixed(1)}s</span>
+              </div>
             </div>
           </div>
         ) : (
@@ -205,6 +235,22 @@ const KokoroOutput: React.FC = observer(() => {
                 <span className="text-sm font-medium">Speed</span>
                 <Badge variant="outline">{kokoroStore.speed.toFixed(1)}x</Badge>
               </div>
+
+              {/* Generation Timer */}
+              {kokoroStore.generationDuration && (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Timer className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm font-medium">Generation Time</span>
+                  </div>
+                  <Badge
+                    variant="default"
+                    className="bg-green-100 text-green-800 border-green-200"
+                  >
+                    {kokoroStore.getFormattedGenerationDuration()}
+                  </Badge>
+                </div>
+              )}
 
               {kokoroStore.messageId && (
                 <div className="space-y-2">

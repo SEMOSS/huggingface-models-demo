@@ -34,6 +34,10 @@ export class KokoroStore {
   sampleRate: number | null = null;
   messageId: string | null = null;
   error: string | null = null;
+  // Timer properties for tracking generation duration
+  generationStartTime: number | null = null;
+  generationEndTime: number | null = null;
+  generationDuration: number | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -74,6 +78,10 @@ export class KokoroStore {
     this.sampleRate = null;
     this.messageId = null;
     this.error = null;
+    // Reset timer properties
+    this.generationStartTime = null;
+    this.generationEndTime = null;
+    this.generationDuration = null;
   }
 
   private base64ToBlob(base64Data: string): Blob {
@@ -98,6 +106,11 @@ export class KokoroStore {
     this.setIsProcessing(true);
     this.setError(null);
 
+    // Start timing the generation
+    this.generationStartTime = Date.now();
+    this.generationEndTime = null;
+    this.generationDuration = null;
+
     try {
       const sanitizedText = this.sanitizeText(this.textInput);
 
@@ -121,11 +134,21 @@ export class KokoroStore {
         const blob = this.base64ToBlob(this.audioData);
         this.audioUrl = URL.createObjectURL(blob);
       }
+
+      // Calculate generation duration on success
+      this.generationEndTime = Date.now();
+      this.generationDuration =
+        this.generationEndTime - (this.generationStartTime || 0);
     } catch (error) {
       console.error("Error generating speech:", error);
       this.setError(
         error instanceof Error ? error.message : "Unknown error occurred"
       );
+
+      // Calculate generation duration on error
+      this.generationEndTime = Date.now();
+      this.generationDuration =
+        this.generationEndTime - (this.generationStartTime || 0);
     } finally {
       this.setIsProcessing(false);
     }
@@ -143,6 +166,14 @@ export class KokoroStore {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+  // Helper method to format generation duration
+  getFormattedGenerationDuration(): string | null {
+    if (this.generationDuration === null) return null;
+
+    const seconds = (this.generationDuration / 1000).toFixed(2);
+    return `${seconds}s`;
   }
 }
 

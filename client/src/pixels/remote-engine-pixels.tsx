@@ -83,7 +83,7 @@ export const runTTSGeneration = async (
 ) => {
   const params = {
     voice: voice,
-    speed: speed,
+    speed: speed.toString(),
   };
 
   const pixelCall = `LLM ( engine = "${engine}", command = "${prompt}", paramValues = [${JSON.stringify(
