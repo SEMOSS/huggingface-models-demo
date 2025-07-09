@@ -122,7 +122,9 @@ export const imageGeneration = async (
   if (Object.keys(params).length === 0) {
     pixelCall = `LLM ( engine = "${engine}", command = "${prompt}" ) ;`;
   } else {
-    pixelCall = `LLM ( engine = "${engine}", command = "${prompt}", paramValues = ${params}) ;`;
+    pixelCall = `LLM ( engine = "${engine}", command = "${prompt}", paramValues = [${JSON.stringify(
+      params
+    )}]) ;`;
   }
 
   const { errors, pixelReturn }: PixelResponse = await runPixel(pixelCall);
