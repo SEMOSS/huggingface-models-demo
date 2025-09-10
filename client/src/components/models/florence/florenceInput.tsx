@@ -194,6 +194,9 @@ const FlorenceInput: React.FC = observer(() => {
                 </SelectItem>
                 <SelectItem value="ocr">OCR</SelectItem>
                 <SelectItem value="ocr with region">OCR with Region</SelectItem>
+                <SelectItem value="open vocabulary detection">
+                  Open Vocabulary Detection
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

@@ -12,7 +12,8 @@ export type FlorenceMode =
   | "referring expression segmentation"
   | "region to segmentation"
   | "ocr"
-  | "ocr with region";
+  | "ocr with region"
+  | "open vocabulary detection";
 
 export class FlorenceStore {
   selectedMode: FlorenceMode = "caption";
@@ -97,6 +98,7 @@ export class FlorenceStore {
       "caption to phrase grounding",
       "referring expression segmentation",
       "region to segmentation",
+      "open vocabulary detection",
     ].includes(this.selectedMode);
   }
 
@@ -116,6 +118,7 @@ export class FlorenceStore {
       "region to segmentation": "<REGION_TO_SEGMENTATION>",
       ocr: "<OCR>",
       "ocr with region": "<OCR_WITH_REGION>",
+      "open vocabulary detection": "<OPEN_VOCABULARY_DETECTION>",
     };
 
     const modeTag = modeToTagMap[this.selectedMode];
