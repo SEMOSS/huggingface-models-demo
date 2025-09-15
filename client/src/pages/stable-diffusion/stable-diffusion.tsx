@@ -1,5 +1,5 @@
 import "../../index.css";
-import { useInsight } from "@semoss/sdk-react";
+import { useInsight } from "@semoss/sdk/react";
 import {
   SidebarProvider,
   SidebarInset,

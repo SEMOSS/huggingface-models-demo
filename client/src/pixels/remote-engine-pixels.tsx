@@ -1,4 +1,4 @@
-import { runPixel, partial } from "@semoss/sdk";
+import { runPixel, partial } from "@semoss/sdk/react";
 
 export const getMyRemoteModels = async () => {
   const { errors, pixelReturn } = await runPixel(`MyRemoteModelsStatus();`);

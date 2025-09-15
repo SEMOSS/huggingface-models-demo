@@ -1,7 +1,7 @@
 import type React from "react";
 import { useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { useInsight } from "@semoss/sdk-react";
+import { useInsight } from "@semoss/sdk/react";
 import { Button } from "../../../@providers/components/ui/button";
 import { Label } from "../../../@providers/components/ui/label";
 import { Card, CardContent } from "../../../@providers/components/ui/card";

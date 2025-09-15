@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Env } from "@semoss/sdk";
-import { InsightProvider } from "@semoss/sdk-react";
+import { Env, InsightProvider } from "@semoss/sdk/react";
 import { Router } from "./pages/Router";
 import { initializeMobX } from "./stores/mobx-config";
 
