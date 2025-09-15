@@ -63,11 +63,11 @@ importers:
         specifier: ^2.6.1
         version: 2.6.1(react-redux@9.2.0(@types/react@18.3.20)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
       '@semoss/sdk':
-        specifier: 1.0.0-beta.20
-        version: 1.0.0-beta.20
+        specifier: 1.0.0-beta.29
+        version: 1.0.0-beta.29(react@18.3.1)
       '@semoss/sdk-react':
         specifier: 1.0.0-beta.17
-        version: 1.0.0-beta.17(@semoss/sdk@1.0.0-beta.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 1.0.0-beta.17(@semoss/sdk@1.0.0-beta.29(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@testing-library/jest-dom':
         specifier: ^5.17.0
         version: 5.17.0
@@ -1835,8 +1835,13 @@ packages:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
 
-  '@semoss/sdk@1.0.0-beta.20':
-    resolution: {integrity: sha512-bAubuiUTVGizVlaol4SL4JI0ouHieRXTXp4KxVYpD/U7zUbGWK+NOUYJ+UV70bDuA21B9VdxxndkDv6YDDlwwg==}
+  '@semoss/sdk@1.0.0-beta.29':
+    resolution: {integrity: sha512-s2dR/SwZVjcB4SMvZMOKs39JdY2PhzTDvNGAj65K3ePtn3T8Xbqojod35fMTHJcFTgRdUqFj9rHTcjQfRBU81g==}
+    peerDependencies:
+      react: 18.3.1
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@sinclair/typebox@0.24.51':
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
@@ -8685,13 +8690,15 @@ snapshots:
 
   '@rushstack/eslint-patch@1.11.0': {}
 
-  '@semoss/sdk-react@1.0.0-beta.17(@semoss/sdk@1.0.0-beta.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@semoss/sdk-react@1.0.0-beta.17(@semoss/sdk@1.0.0-beta.29(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@semoss/sdk': 1.0.0-beta.20
+      '@semoss/sdk': 1.0.0-beta.29(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@semoss/sdk@1.0.0-beta.20': {}
+  '@semoss/sdk@1.0.0-beta.29(react@18.3.1)':
+    optionalDependencies:
+      react: 18.3.1
 
   '@sinclair/typebox@0.24.51': {}
 

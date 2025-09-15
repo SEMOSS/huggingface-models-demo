@@ -90,6 +90,22 @@ const ModelsSidebar = observer(() => {
         </SidebarGroup>
 
         <SidebarGroup>
+          <SidebarGroupLabel>Speech to Text</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/whisper" className="flex items-center">
+                    <RiImageCircleAiFill className="mr-2 size-4" />
+                    <span>whisper-large-v3</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
           <SidebarGroupLabel>Options</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

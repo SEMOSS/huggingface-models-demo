@@ -11,6 +11,7 @@ import { useInsight } from "@semoss/sdk-react";
 import App from "./app/App";
 import StableDiffusion from "./stable-diffusion/stable-diffusion";
 import Kokoro from "./kokoro/kokoro";
+import WhisperContainer from "../components/models/whisper/whisperContainer";
 
 export const history = createHashHistory();
 
@@ -42,6 +43,7 @@ export const Router = () => {
         <Route path="/" element={<App />} />
         <Route path="/stable-diffusion" element={<StableDiffusion />} />
         <Route path="/kokoro" element={<Kokoro />} />
+        <Route path="/whisper" element={<WhisperContainer />} />
       </Routes>
     </ReactRouter>
   );

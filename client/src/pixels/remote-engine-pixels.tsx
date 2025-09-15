@@ -137,3 +137,17 @@ export const imageGeneration = async (
 
   return output;
 };
+
+export const runTranscribe = async (filePath: string) => {
+  let pixelCall = `ExecuteFunctionEngine(engine = "5967ce22-ff0b-402c-8607-4bdcd2772633", map=[{"filePath":"${filePath}"}] );`;
+
+  const { errors, pixelReturn }: PixelResponse = await runPixel(pixelCall);
+
+  if (errors.length > 0) {
+    throw new Error(errors.join(""));
+  }
+
+  const { output } = pixelReturn[0];
+
+  return output;
+};
