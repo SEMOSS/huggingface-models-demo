@@ -173,14 +173,14 @@ const WhisperInput: React.FC = observer(() => {
           {/* Audio Upload/Recording Section */}
           <div className="space-y-4">
             <Label className="text-base font-medium">Audio</Label>
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-dashed border-gray-300 bg-gray-50">
-              <div className="absolute inset-0 flex items-center justify-center">
-                {audioUrl && (
-                  <div className="flex flex-col items-center space-y-4 w-full p-4">
+            <div className="relative aspect-video w/full overflow-hidden rounded-lg border border-dashed border-gray-300 bg-gray-50">
+              {/* Audio preview layer */}
+              {audioUrl && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
+                  <div className="flex flex-col items-center space-y-4 w-full">
                     <audio
                       ref={audioRef}
                       src={audioUrl}
-                      onEnded={() => setIsPlaying(false)}
                       className="w-full"
                       controls
                     />
@@ -188,7 +188,19 @@ const WhisperInput: React.FC = observer(() => {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={togglePlayback}
+                        onClick={async () => {
+                          const audio = audioRef.current;
+                          if (!audio) return;
+                          try {
+                            if (audio.paused) {
+                              await audio.play();
+                            } else {
+                              audio.pause();
+                            }
+                          } catch (err) {
+                            console.error("Playback error:", err);
+                          }
+                        }}
                         className="flex items-center gap-2 bg-transparent"
                       >
                         {isPlaying ? <Pause size={16} /> : <Play size={16} />}
@@ -196,45 +208,49 @@ const WhisperInput: React.FC = observer(() => {
                       </Button>
                     </div>
                   </div>
-                )}
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center bg-black/5">
-                <div className="flex flex-col items-center space-y-2">
-                  <div className="flex space-x-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={triggerFileInput}
-                      className="flex items-center gap-2 bg-transparent"
-                      disabled={isRecording}
-                    >
-                      <Upload size={16} />
-                      Upload
-                    </Button>
-                    <Button
-                      variant={isRecording ? "destructive" : "outline"}
-                      size="sm"
-                      onClick={isRecording ? stopRecording : startRecording}
-                      className="flex items-center gap-2"
-                    >
-                      {isRecording ? <Square size={16} /> : <Mic size={16} />}
-                      {isRecording ? "Stop" : "Record"}
-                    </Button>
-                  </div>
-                  {isRecording && (
-                    <div className="text-sm text-red-600 font-medium">
-                      Recording: {formatTime(recordingTime)}
-                    </div>
-                  )}
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    accept="audio/*"
-                    className="hidden"
-                  />
                 </div>
-              </div>
+              )}
+
+              {/* Upload/record overlay — hide when audioUrl exists */}
+              {!audioUrl && (
+                <div className="absolute inset-0 z-0 flex items-center justify-center bg-black/5">
+                  <div className="flex flex-col items-center space-y-2">
+                    <div className="flex space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={triggerFileInput}
+                        className="flex items-center gap-2 bg-transparent"
+                        disabled={isRecording}
+                      >
+                        <Upload size={16} />
+                        Upload
+                      </Button>
+                      <Button
+                        variant={isRecording ? "destructive" : "outline"}
+                        size="sm"
+                        onClick={isRecording ? stopRecording : startRecording}
+                        className="flex items-center gap-2"
+                      >
+                        {isRecording ? <Square size={16} /> : <Mic size={16} />}
+                        {isRecording ? "Stop" : "Record"}
+                      </Button>
+                    </div>
+                    {isRecording && (
+                      <div className="text-sm text-red-600 font-medium">
+                        Recording: {formatTime(recordingTime)}
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                      accept="audio/*"
+                      className="hidden"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {uploadError && (

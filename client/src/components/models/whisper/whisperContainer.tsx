@@ -2,12 +2,17 @@ import React from "react";
 import WhisperBanner from "./whisperBanner";
 import WhisperInput from "./whisperInput";
 import WhisperOutput from "./whisperOutput";
+import ModelDetails from "../../containers/model-details";
 
 interface WhisperContainerProps {
   children?: React.ReactNode;
 }
 
 const WhisperContainer: React.FC<WhisperContainerProps> = ({ children }) => {
+  const pythonExample = `from gaas_gpt_function import FunctionEngine 
+function = FunctionEngine(engine_id = "5967ce22-ff0b-402c-8607-4bdcd2772633", insight_id = your_insightId)
+output = function.execute({"filePath":"string"})`;
+  const pixelExample = `ExecuteFunctionEngine(engine = "5967ce22-ff0b-402c-8607-4bdcd2772633", map=[{"filePath":"/path-to/file.wav"}] );`;
   return (
     <div className="w-full h-full">
       <WhisperBanner />
@@ -24,6 +29,13 @@ const WhisperContainer: React.FC<WhisperContainerProps> = ({ children }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <WhisperInput />
         <WhisperOutput />
+      </div>
+      <div className="p-4">
+        <ModelDetails
+          modelType="Function Engine"
+          pythonExample={pythonExample}
+          pixelExample={pixelExample}
+        />
       </div>
     </div>
   );
