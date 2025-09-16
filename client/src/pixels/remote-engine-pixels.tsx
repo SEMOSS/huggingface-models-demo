@@ -138,10 +138,13 @@ export const imageGeneration = async (
   return output;
 };
 
-export const runTranscribe = async (filePath: string) => {
+export const runTranscribe = async (filePath: string, insightId: string) => {
   let pixelCall = `ExecuteFunctionEngine(engine = "5967ce22-ff0b-402c-8607-4bdcd2772633", map=[{"filePath":"${filePath}"}] );`;
 
-  const { errors, pixelReturn }: PixelResponse = await runPixel(pixelCall);
+  const { errors, pixelReturn }: PixelResponse = await runPixel(
+    pixelCall,
+    insightId
+  );
 
   if (errors.length > 0) {
     throw new Error(errors.join(""));

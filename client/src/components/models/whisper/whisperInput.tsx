@@ -9,7 +9,7 @@ import { Upload, Mic, Square, Play, Pause } from "lucide-react";
 import whisperStore from "../../../stores/whisperStore";
 
 const WhisperInput: React.FC = observer(() => {
-  const { actions } = useInsight();
+  const { actions, insightId } = useInsight();
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordedAudio, setRecordedAudio] = useState<Blob | null>(null);
@@ -26,7 +26,7 @@ const WhisperInput: React.FC = observer(() => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const uploadToSemoss = async (localFile: File) => {
-    const upload = await actions.upload(localFile, "audio-file");
+    const upload = await actions.upload(localFile, "audio-files");
 
     if (!upload || upload.length === 0) {
       throw new Error("Upload failed");
@@ -140,7 +140,7 @@ const WhisperInput: React.FC = observer(() => {
     }
 
     setUploadError(null);
-    whisperStore.transcribeAudio(whisperStore.audioFilePath);
+    whisperStore.transcribeAudio(whisperStore.audioFilePath, insightId);
   };
 
   const handleReset = () => {

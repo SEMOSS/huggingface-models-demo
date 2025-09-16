@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Server } from "lucide-react";
 import { GrWindows } from "react-icons/gr";
 import { RiImageCircleAiFill } from "react-icons/ri";
+import { LuSpeech } from "react-icons/lu";
 import { BsSoundwave } from "react-icons/bs";
 
 const ModelsSidebarStatic = observer(() => {
@@ -113,7 +114,7 @@ const ModelsSidebarStatic = observer(() => {
                   hover:bg-sidebar-accent hover:text-sidebar-accent-foreground
                 "
               >
-                <RiImageCircleAiFill className="size-4 shrink-0" />
+                <LuSpeech className="size-4 shrink-0" />
                 <span className="truncate">whisper-large-v3</span>
               </Link>
             </li>

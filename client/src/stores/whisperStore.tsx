@@ -18,10 +18,10 @@ class WhisperStore {
     this.isProcessing = processing;
   }
 
-  async transcribeAudio(filePath: string) {
+  async transcribeAudio(filePath: string, insightId: string) {
     this.setIsProcessing(true);
     try {
-      this.transcriptionResult = await runTranscribe(filePath);
+      this.transcriptionResult = await runTranscribe(filePath, insightId);
     } catch (error) {
       console.error("Error transcribing audio:", error);
       this.transcriptionResult = `Error: ${

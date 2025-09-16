@@ -32,7 +32,7 @@ export const WhisperBanner = observer(() => {
     }
   }, [modelsStore.activeModels, modelsStore.warmingModels]);
 
-  console.log("Model State:", modelsStore.activeModels);
+  // console.log("Model State:", modelsStore.activeModels);
 
   const statusColors = {
     COLD: "bg-blue-500",
