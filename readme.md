@@ -1,3 +1,3 @@
 # HuggingFace Model Demos App
 
-![demo](portals/demo.png)
+![demo](client/public/demo.png)

@@ -1,7 +1,7 @@
 import "../../index.css";
 import { useInsight } from "@semoss/sdk/react";
 import useFetchUserData from "../../hooks/useFetchUserData";
-import FlorenceContainer from "../../components/models/florence/florenceContainer";
+import WhisperContainer from "../../components/models/whisper/whisperContainer";
 import ModelsSidebarStatic from "../../components/containers/sidebar2";
 import MobileSidebar from "../../components/containers/mobile-sidebar";
 function App() {
@@ -42,7 +42,7 @@ function App() {
           <h1 className="font-semibold">Model Demos</h1>
         </header>
         <div className="flex-1 min-w-0 p-4">
-          <FlorenceContainer />
+          <WhisperContainer />
         </div>
       </main>
     </div>

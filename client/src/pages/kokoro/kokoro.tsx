@@ -7,6 +7,8 @@ import {
 import ModelsSidebar from "../../components/containers/sidebar";
 import useFetchUserData from "../../hooks/useFetchUserData";
 import KokoroContainer from "../../components/models/kokoro/kokoroContainer";
+import ModelsSidebarStatic from "../../components/containers/sidebar2";
+import MobileSidebar from "../../components/containers/mobile-sidebar";
 
 function Kokoro() {
   const { isAuthorized } = useInsight();
@@ -32,14 +34,24 @@ function Kokoro() {
   }
 
   return (
-    <SidebarProvider>
-      <div className="flex h-screen w-full">
-        <ModelsSidebar />
-        <SidebarInset className="flex-1 p-4 w-full">
+    <div
+      className="
+        min-h-svh
+        grid
+        grid-cols-1 md:grid-cols-[16rem_1fr] lg:grid-cols-[18rem_1fr]
+      "
+    >
+      <ModelsSidebarStatic />
+      <main className="flex min-w-0 flex-col">
+        <header className="flex h-16 shrink-0 items-center gap-2 px-4 border-b">
+          <MobileSidebar />
+          <h1 className="font-semibold">Model Demos</h1>
+        </header>
+        <div className="flex-1 min-w-0 p-4">
           <KokoroContainer />
-        </SidebarInset>
-      </div>
-    </SidebarProvider>
+        </div>
+      </main>
+    </div>
   );
 }
 

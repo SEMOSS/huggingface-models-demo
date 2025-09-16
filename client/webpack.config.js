@@ -75,17 +75,11 @@ const config = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            esModule: false,
-                        },
-                    },
-                    'css-loader',
-                    'postcss-loader',
-                ],
+            use: [
+                isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                'css-loader',
+                'postcss-loader',    // uses @tailwindcss/postcss now
+            ],
             },
 
             // Add your rules for custom modules here

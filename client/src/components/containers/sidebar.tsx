@@ -49,7 +49,7 @@ const ModelsSidebar = observer(() => {
                 <SidebarMenuButton asChild>
                   <Link to="/" className="flex items-center">
                     <GrWindows className="mr-2 size-4" />
-                    <span>microsoft/Florence-2-large</span>
+                    <span className="truncate">microsoft/Florence-2-large</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -65,7 +65,7 @@ const ModelsSidebar = observer(() => {
                 <SidebarMenuButton asChild>
                   <Link to="/kokoro" className="flex items-center">
                     <BsSoundwave className="mr-2 size-4" />
-                    <span>hexgrad/Kokoro-82M</span>
+                    <span className="truncate">hexgrad/Kokoro-82M</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -79,9 +79,14 @@ const ModelsSidebar = observer(() => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/stable-diffusion" className="flex items-center">
+                  <Link
+                    to="/stable-diffusion"
+                    className="flex min-w-0 items-center"
+                  >
                     <RiImageCircleAiFill className="mr-2 size-4" />
-                    <span>stable-diffusion-v1-5/stable-diffusion-v1-5</span>
+                    <span className="truncate">
+                      stable-diffusion-v1-5/stable-diffusion-v1-5
+                    </span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -105,7 +110,7 @@ const ModelsSidebar = observer(() => {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup>
+        {/* <SidebarGroup>
           <SidebarGroupLabel>Options</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -116,7 +121,7 @@ const ModelsSidebar = observer(() => {
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
       </SidebarContent>
     </Sidebar>
   );
